@@ -1,0 +1,52 @@
+using System;
+using System.Windows.Forms;
+
+namespace Lab03
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnXuat_Click(object sender, EventArgs e)
+        {
+            // Lấy họ tên
+            string hoTen = txtHoTen.Text.Trim();
+
+            // Kiểm tra nhập tên
+            if (string.IsNullOrWhiteSpace(hoTen))
+            {
+                MessageBox.Show("Vui lòng nhập họ tên!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy ngày sinh
+            string ngaySinh = dateTimePicker1.Value.ToString("dd/MM/yyyy");
+
+            // Lấy giới tính
+            string gioiTinh = radioNam.Checked ? "Nam" :
+                              radioNu.Checked ? "Nữ" : "Chưa chọn";
+
+            // Lấy sở thích
+            string soThich = "";
+            if (chkTheThao.Checked) soThich += "Thể thao, ";
+            if (chkPhimAnh.Checked) soThich += "Phim ảnh, ";
+            if (chkDuLich.Checked) soThich += "Du lịch, ";
+
+            if (soThich.EndsWith(", "))
+                soThich = soThich.Substring(0, soThich.Length - 2);
+            if (string.IsNullOrEmpty(soThich))
+                soThich = "Không có";
+
+            // Xuất thông tin
+            string thongTin = $"Họ tên: {hoTen}\n" +
+                              $"Ngày sinh: {ngaySinh}\n" +
+                              $"Giới tính: {gioiTinh}\n" +
+                              $"Sở thích: {soThich}";
+
+            MessageBox.Show(thongTin, "Thông tin cá nhân", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+}
